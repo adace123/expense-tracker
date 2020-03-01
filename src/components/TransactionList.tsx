@@ -4,7 +4,7 @@ import { generateFakeTransactions } from '../utils';
 
 export const TransactionList = () => (
     <div className="box">
-        <p className="has-text-weight-bold">History</p>
+        <p className="has-text-weight-bold">History <span>(10 Transactions)</span></p>
         <div className="horizontal-divider"></div>
         <div className="transaction-list">
             {

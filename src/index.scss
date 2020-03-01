@@ -4,7 +4,7 @@ html, body {
 }
 
 #app {
-    min-width: 50vw;
+    width: 50vw;
 }
 
 #title {
@@ -56,4 +56,10 @@ html, body {
 
 .transaction-form {
     margin-top: 10px;
+}
+
+@media(max-width: 768px) {
+    #app {
+        width: 90vw;
+    }
 }
