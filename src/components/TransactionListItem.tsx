@@ -1,13 +1,14 @@
 import * as React from 'react';
+import { Transaction } from '../types';
 
-export const Transaction = ({  }) => (
+export const TransactionListItem = (transaction: Transaction) => (
     <div className="box transaction-item" style={{borderRight: '8px solid purple'}}>
         <div className="level">
             <div className="level-left">
-                Cash
+                {transaction.category}
             </div>
             <div className="level-right">
-                +500
+                {transaction.amount}
             </div>
         </div>
     </div>

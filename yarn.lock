@@ -2,6 +2,16 @@
 # yarn lockfile v1
 
 
+"@types/faker@^4.1.10":
+  version "4.1.10"
+  resolved "https://registry.yarnpkg.com/@types/faker/-/faker-4.1.10.tgz#ec31466931086122b05be719d084989ffe3d6eb6"
+  integrity sha512-Z1UXXNyxUcuu7CSeRmVizMgH7zVYiwfiTgXMnSTvsYDUnVt3dbMSpPdfG/H41IBiclgFGQJgLVdDFeinhhmWTg==
+
+"@types/lodash@^4.14.149":
+  version "4.14.149"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.149.tgz#1342d63d948c6062838fbf961012f74d4e638440"
+  integrity sha512-ijGqzZt/b7BfzcK9vTrS6MFljQRPn5BFWOx8oE0GYxribu6uV+aA9zZuXI1zc/etK9E8nrgdoF2+LgUw7+9tJQ==
+
 "@types/prop-types@*":
   version "15.7.3"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
@@ -21,6 +31,11 @@
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
+
+"@types/uuid@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-7.0.0.tgz#9f6993ccc8210efa90bda7e1afabbb06a9f860cd"
+  integrity sha512-RiX1I0lK9WFLFqy2xOxke396f0wKIzk5sAll0tL4J4XDYJXURI7JOs96XQb3nP+2gEpQ/LutBb66jgiT5oQshQ==
 
 anymatch@~3.1.1:
   version "3.1.1"
@@ -66,6 +81,11 @@ csstype@^2.2.0:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.9.tgz#05141d0cd557a56b8891394c1911c40c8a98d098"
   integrity sha512-xz39Sb4+OaTsULgUERcCk+TJj8ylkL4aSVDQiX/ksxbELSqwkgt4d4RD7fovIdgJGSuNYqwZEiVjYY5l0ask+Q==
+
+faker@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/faker/-/faker-4.1.0.tgz#1e45bbbecc6774b3c195fad2835109c6d748cc3f"
+  integrity sha1-HkW7vsxndLPBlfrSg1EJxtdIzD8=
 
 fill-range@^7.0.1:
   version "7.0.1"
@@ -114,6 +134,11 @@ is-number@^7.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
   integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
+
+lodash@^4.17.15:
+  version "4.17.15"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
+  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
 
 loose-envify@^1.1.0, loose-envify@^1.4.0:
   version "1.4.0"
@@ -203,3 +228,8 @@ typescript@^3.8.3:
   version "3.8.3"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.8.3.tgz#409eb8544ea0335711205869ec458ab109ee1061"
   integrity sha512-MYlEfn5VrLNsgudQTVJeNaQFUAI7DkhnOjdpAp4T+ku1TfQClewlbSuTVHiA+8skNBgaf02TL/kLOvig4y3G8w==
+
+uuid@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-7.0.1.tgz#95ed6ff3d8c881cbf85f0f05cc3915ef994818ef"
+  integrity sha512-yqjRXZzSJm9Dbl84H2VDHpM3zMjzSJQ+hn6C4zqd5ilW+7P4ZmLEEqwho9LjP+tGuZlF4xrHQXT0h9QZUS/pWA==

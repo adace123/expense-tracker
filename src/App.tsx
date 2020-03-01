@@ -9,7 +9,7 @@ import { TransactionList } from './components/TransactionList';
 import { TransactionForm } from './components/TransactionForm';
 
 const App = () => (
-    <div id="expense-tracker" className="box has-background-light">
+    <div id="expense-tracker" className="is-fullheight box has-background-light">
         <p id="title" className="is-size-4 has-text-weight-bold">
             Expense Tracker
         </p>
