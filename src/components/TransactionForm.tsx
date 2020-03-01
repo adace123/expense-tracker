@@ -42,6 +42,12 @@ export const TransactionForm = () => (
                 </div>
             </div>
             <div className="field">
+                <label className="label">Merchant</label>
+                <div className="control">
+                    <input className="input"/>
+                </div>
+            </div>
+            <div className="field">
                 <label className="label">Amount</label>
                 <div className="control">
                     <input className="input is-small" type="number" step="0.01"/>

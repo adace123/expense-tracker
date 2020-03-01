@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { TransactionListItem } from './TransactionListItem';
-import { Categories, TransactionType } from '../types';
 import { generateFakeTransactions } from '../utils';
 
 export const TransactionList = () => (
