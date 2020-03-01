@@ -42,13 +42,14 @@ html, body {
     overflow: scroll;
 }
 
-.transaction-item {
+.transaction-item, i {
     cursor: pointer;
 }
 
 .transaction-list {
     max-height: 25vh;
     margin-top: 1.5rem;
+    overflow: scroll;
     .transaction-item {
         margin-top: -1rem;
     }

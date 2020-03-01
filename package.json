@@ -13,6 +13,7 @@
     "build": "parcel build src/index.html --out-dir build/release --public-url ./"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.12.1",
     "@types/faker": "^4.1.10",
     "@types/lodash": "^4.14.149",
     "@types/uuid": "^7.0.0",
