@@ -33,13 +33,17 @@ html, body {
 
 .horizontal-divider {
     width: 100%;
-    margin-top: 5px;
+    margin: 5px 0;
     border-top: 2px solid #e0e0e0;
 }
 
 .box {
     margin-top: 10px;
     overflow: scroll;
+}
+
+.transaction-item {
+    cursor: pointer;
 }
 
 .transaction-list {

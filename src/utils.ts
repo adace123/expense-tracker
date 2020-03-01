@@ -12,7 +12,8 @@ export function generateFakeTransactions(amount: number): Transaction[] {
             category: Categories[_.sample(Object.keys(Categories))],
             type: TransactionType[_.sample(Object.keys(TransactionType))],
             description: faker.lorem.sentence(),
-            amount: parseInt(faker.finance.amount())
+            amount: parseFloat(faker.commerce.price()),
+            merchant: faker.company.companyName()
         });
     }
     return transactionData;

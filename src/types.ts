@@ -13,6 +13,7 @@ export interface Transaction {
     description?: string;
     date: Date;
     type: TransactionType;
+    merchant: string;
     amount: number;
 }
 
