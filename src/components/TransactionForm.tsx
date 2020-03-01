@@ -32,7 +32,6 @@ export const TransactionForm = () => (
                                     <select>
                                         {
                                             Object.keys(Categories)
-                                                .sort()
                                                 .map(k => <option>{Categories[k]}</option>)
                                         }
                                     </select>
@@ -42,13 +41,19 @@ export const TransactionForm = () => (
                     </div>
                 </div>
             </div>
-            
+            <div className="field">
+                <label className="label">Amount</label>
+                <div className="control">
+                    <input className="input is-small" type="number" step="0.01"/>
+                </div>
+            </div>
             <div className="field">
                 <label className="label">Description</label>
                 <div className="control">
                     <input className="input" placeholder="Optional"/>
                 </div>
             </div>
+            <button className="button has-background-success has-text-white is-medium is-fullwidth">Add Transaction</button>
         </form>
     </div>
 );
