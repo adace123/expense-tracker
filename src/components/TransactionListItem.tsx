@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import moment from 'moment';
-import { CSSTransition } from 'react-transition-group';
 import { Transaction, TransactionType } from '../types';
 
 export const TransactionListItem = (transaction: Transaction) =>  {
