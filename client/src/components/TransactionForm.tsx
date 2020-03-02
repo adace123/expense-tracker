@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Categories, TransactionType } from '../types';
+import { Category, TransactionType } from '../types';
 
 export const TransactionForm = () => {
     const [isCollapsed, setIsCollapsed] = useState(true);
@@ -40,8 +40,8 @@ export const TransactionForm = () => {
                                     <div className="select">
                                         <select>
                                             {
-                                                Object.keys(Categories)
-                                                    .map(k => <option>{Categories[k]}</option>)
+                                                Object.keys(Category)
+                                                    .map(k => <option>{Category[k]}</option>)
                                             }
                                         </select>
                                     </div>

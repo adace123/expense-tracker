@@ -7,20 +7,20 @@ export enum TransactionType {
     CREDIT = 'Credit'
 }
 
-export interface Transaction {
-    _id: string;
-    category: string;
-    description?: string;
-    date: Date;
-    type: TransactionType;
-    merchant: string;
-    amount: number;
-}
-
-export enum Categories {
+export enum Category {
     GROCERIES = 'Groceries',
     ENTERTAINMENT = 'Entertainment',
     RESTAURANT = 'Restaurant',
     AUTO = 'Auto',
     OTHER = 'Other'
+}
+
+export interface Transaction {
+    _id: string;
+    category: Category;
+    description?: string;
+    date: Date;
+    type: TransactionType;
+    merchant: string;
+    amount: number;
 }
