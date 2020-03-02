@@ -1,0 +1,66 @@
+html, body {
+    display: flex;
+    justify-content: center;
+}
+
+#app {
+    width: 50vw;
+}
+
+#title {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+#expense-tracker {
+    padding: 30px;
+}
+
+.columns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.column {
+    margin: 0 15px;
+}
+
+.vertical-divider {
+    height: 45px;
+    border-left: 2px solid #e0e0e0;
+}
+
+.horizontal-divider {
+    width: 100%;
+    margin: 5px 0;
+    border-top: 2px solid #e0e0e0;
+}
+
+.box {
+    margin-top: 10px;
+    overflow: scroll;
+}
+
+.transaction-item, i {
+    cursor: pointer;
+}
+
+.transaction-list {
+    max-height: 25vh;
+    margin-top: 1.5rem;
+    overflow: scroll;
+    .transaction-item {
+        margin-top: -1rem;
+    }
+}
+
+.transaction-form {
+    margin-top: 10px;
+}
+
+@media(max-width: 768px) {
+    #app {
+        width: 90vw;
+    }
+}

@@ -1,0 +1,17 @@
+version: '3'
+services: 
+  client:
+    build: client/
+    container_name: expense_tracker_client
+    ports: 
+      - "1234:1234"
+    volumes: 
+      - ./client:/app
+      - ./client/node_modules
+  #   depends_on: server
+  # server:
+  #   build: server/
+  #   ports:
+  #     - "8000:8000"
+  #   volumes: 
+  #     - ./server:/app
