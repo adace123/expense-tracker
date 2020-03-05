@@ -1,6 +1,7 @@
-.yarn/
-node_modules/
-build/
+**/.yarn/
+**/node_modules/
+**/build/
+**/dist/
 .cache/
-
+**/.env
 *.log

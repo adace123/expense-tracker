@@ -8,8 +8,8 @@ COPY yarn.lock .
 
 COPY src/ .
 
-RUN npm install
+RUN yarn
 
 RUN yarn global add parcel-bundler
 
-CMD npm run dev
+CMD yarn run dev
