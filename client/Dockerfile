@@ -1,4 +1,4 @@
-FROM node
+FROM node:slim
 
 WORKDIR /app
 
@@ -8,8 +8,6 @@ COPY yarn.lock .
 
 COPY src/ .
 
-RUN yarn
-
-RUN yarn global add parcel-bundler
+RUN yarn && yarn global add parcel-bundler
 
 CMD yarn run dev

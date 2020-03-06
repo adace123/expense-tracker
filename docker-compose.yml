@@ -8,10 +8,10 @@ services:
     volumes: 
       - ./client:/app
       - ./client/node_modules
-  #   depends_on: server
-  # server:
-  #   build: server/
-  #   ports:
-  #     - "8000:8000"
-  #   volumes: 
-  #     - ./server:/app
+    depends_on: [server]
+  server:
+    build: server/
+    ports:
+      - "8000:8000"
+    volumes: 
+      - ./server:/app

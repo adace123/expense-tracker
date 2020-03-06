@@ -1,13 +1,15 @@
-FROM node
+FROM node:slim
 
 WORKDIR /app
 
-COPY package.json .
+COPY *.json ./
 
 COPY yarn.lock .
 
 COPY src/ .
 
-RUN yarn
+COPY .env dist/
 
-CMD ["yarn", "start"]
+RUN yarn && yarn global add nodemon ts-node typescript
+
+CMD ["yarn", "dev"]
