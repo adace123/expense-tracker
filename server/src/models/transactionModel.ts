@@ -1,27 +1,15 @@
-import mongoose from 'mongoose';
-
-enum TransactionType {
-    DEBIT = 'Debit',
-    CREDIT = 'Credit'
-}
-
-enum Category {
-    GROCERIES = 'Groceries',
-    ENTERTAINMENT = 'Entertainment',
-    RESTAURANT = 'Restaurant',
-    AUTO = 'Auto',
-    OTHER = 'Other'
-}
+import * as mongoose from 'mongoose';
+import { Category, TransactionType } from '../../../types/transaction';
 
 const TransactionSchema = new mongoose.Schema({
     category: {
         type: String,
-        enum: Category,
+        enum: Object.keys(Category),
         required: true
     },
     type: {
         type: String,
-        enum: TransactionType,
+        enum: Object.keys(TransactionType),
         required: true
     },
     description: String,
