@@ -5,6 +5,20 @@ export default gql`
         transactions: [Transaction!]!
         transaction(id: ID!): Transaction!
     }
+
+    input TransactionInput {
+        type: TransactionType!
+        category: Category!
+        description: String
+        merchant: String!
+        amount: Float!
+    }
+
+    type Mutation {
+        createTransaction(transaction: TransactionInput!): Transaction!
+        deleteTransaction(id: ID!): Transaction!
+        updateTransaction(id: ID!, transaction: TransactionInput!): Transaction!
+    }
     
     enum Category {
         GROCERIES
