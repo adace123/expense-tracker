@@ -34,14 +34,13 @@ command
 dbConnect().then(async connection => {
     const fakeTransactionRecords = generateFakeTransactions(command.numRecords)
         .map(document => ({insertOne: { document }}));
-    const testTransactionModel = mongoose.model('test-transaction', transactionModel.schema);
-
+    
     if (command.reset) {
-        testTransactionModel.collection.drop();
+        transactionModel.collection.drop();
     }
 
     try {
-        await testTransactionModel.collection.bulkWrite(fakeTransactionRecords);
+        await transactionModel.bulkWrite(fakeTransactionRecords);
         console.log(`Wrote ${command.numRecords} fake transactions to the DB.`);
     } catch(e) {
         console.log(e);

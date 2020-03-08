@@ -14,7 +14,7 @@ const TransactionSchema = new mongoose.Schema({
     },
     description: String,
     date: {
-        type: Date,
+        type: String,
         required: true
     },
     merchant: {
