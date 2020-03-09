@@ -6,7 +6,7 @@ dotenv.config();
 export default async (): Promise<mongoose.ConnectionBase> => {
     try {
         const { connection } = await mongoose.connect(process.env.MONGO_CONNECTION_STRING as string, { 
-            useNewUrlParser: true, useUnifiedTopology: true, keepAlive: true
+            useNewUrlParser: true, useUnifiedTopology: true, keepAlive: true, connectTimeoutMS: 30000
          })
         console.log('Mongo connection established');
         return connection;
