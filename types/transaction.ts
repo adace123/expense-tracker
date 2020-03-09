@@ -1,3 +1,5 @@
+import * as mongoose from 'mongoose';
+
 export interface Budget {
     budgetAmount: number;
 }
@@ -16,6 +18,7 @@ export enum Category {
 }
 
 export interface Transaction {
+    _id: mongoose.Types.ObjectId,
     category: Category;
     description?: string;
     date: Date;
