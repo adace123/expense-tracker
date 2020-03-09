@@ -4,6 +4,8 @@ export default gql`
     type Query {
         transactions: [Transaction!]!
         transaction(id: ID!): Transaction!
+        users: [User!]!
+        user(id: ID!): User!
     }
 
     input TransactionInput {
@@ -42,4 +44,11 @@ export default gql`
         merchant: String!
         amount: Float!
     }    
+
+    type User {
+        _id: ID!
+        email: String!
+        password: String!
+        transactions: [Transaction]
+    }
 `;
