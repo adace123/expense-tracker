@@ -38,7 +38,7 @@
   "scripts": {
     "start": "node src/dist/server.js",
     "dev": "nodemon src/server.ts",
-    "test": "NODE_ENV=DEV mocha --timeout 10000 --exit -r ts-node/register src/tests/*.ts",
+    "test": "NODE_ENV=DEV mocha --timeout 10000 --exit -r ts-node/register src/tests/*.test.ts",
     "build": "tsc -p src/"
   }
 }
