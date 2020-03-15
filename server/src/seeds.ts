@@ -1,16 +1,11 @@
-import { Command } from 'commander'; 
 import * as faker from 'faker';
 import * as _ from 'lodash';
-
 import * as mongoose from 'mongoose';
 
-import User from '../../types/user';
-import { Transaction, Category, TransactionType } from '../../types/transaction';
+import { User } from './types/user';
+import { Transaction, Category, TransactionType } from './types/transaction';
 import transactionModel from './models/transactionModel';
 import userModel from './models/userModel';
-import dbConnect from './db';
-
-const command = new Command();
 
 interface FakeData {
     users: Array<User>;
@@ -21,7 +16,7 @@ function preprocessBulkWrite(documentArray: Array<User | Transaction>): any[] {
     return documentArray.map(document => ({ insertOne: { document } }));
 }
 
-export function generateFakeData(transactionCount: number, usercount: number): FakeData {
+function generateFakeData(transactionCount: number, usercount: number): FakeData {
     const fakeUsers: Array<User> = _.range(0, usercount).map(i => (
         {
             _id: new mongoose.Types.ObjectId(),
@@ -57,29 +52,32 @@ export function generateFakeData(transactionCount: number, usercount: number): F
     };
 }
 
-command
-    .option('-t, --numTransactions <number>', 'Number of transactions to save', 10)
-    .option('-u, --numUsers <number>', 'Number of users to save', 5)
-    .option('--no-reset', 'Delete transaction-test collection before saving')
-    .parse(process.argv);
-
-dbConnect().then(async connection => {
-    const { users, transactions } = generateFakeData(command.numTransactions, command.numUsers);
-    
-    if (command.reset) {
-        userModel.countDocuments((_, count) => {
-            count && userModel.collection.drop();
-        });
-    }
+async function seedTestDb(numTransactions: number, numUsers: number) {
+    await dropTestDb();
+    const { users, transactions } = generateFakeData(numTransactions, numUsers);
 
     try {
         await transactionModel.bulkWrite(preprocessBulkWrite(transactions));
         await userModel.bulkWrite(preprocessBulkWrite(users));
-        console.log(`Wrote ${command.numUsers} fake users to the DB.`);
-        console.log(`Wrote ${command.numTransactions} fake transactions to the DB.`);
+        console.log(`Wrote ${numUsers} fake users to the test DB.`);
+        console.log(`Wrote ${numTransactions} fake transactions to the test DB.`);
     } catch(e) {
-        console.log(e);
-    } finally {
-        connection.close();
+        throw e;
     }
-});
+}
+
+async function dropTestDb() {
+    for (const model of [transactionModel, userModel]) {
+        try {
+            const documentCount = await model.countDocuments();
+            if (documentCount) {
+                console.log(`Dropping the ${model.collection.name} collection from the test DB`);
+                await model.collection.drop();
+            }
+        } catch (e) {
+            throw e;
+        }
+    }
+}
+
+export default seedTestDb;
