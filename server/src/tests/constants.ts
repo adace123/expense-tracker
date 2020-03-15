@@ -12,6 +12,19 @@ const queries = {
             }
         }
     `,
+    transaction: `
+       query getTransaction($transactionId: ID!) {
+            transaction(id: $transactionId) {
+                _id
+                amount
+                description
+                merchant
+                date
+                category
+                type
+            }
+        }
+    `,
     users: `{
         users {
             _id
@@ -22,6 +35,18 @@ const queries = {
             }
         }
     }
+    `,
+    user: `
+        query getUser($userId: ID!) {
+            user(id: $userId) {
+                _id
+                email
+                password
+                transactions {
+                    amount
+                }
+            }
+        }
     `
 };
 
