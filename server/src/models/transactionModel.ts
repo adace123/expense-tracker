@@ -1,5 +1,5 @@
 import * as mongoose from 'mongoose';
-import { Category, TransactionType } from '../../../types/transaction';
+import { Category, TransactionType } from '../types/transaction';
 
 const TransactionSchema = new mongoose.Schema({
     category: {
