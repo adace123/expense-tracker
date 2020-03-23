@@ -33,7 +33,7 @@ function generateFakeData(transactionCount: number, usercount: number): FakeData
 
         const transaction = {
             _id: new mongoose.Types.ObjectId(),
-            date: faker.date.past(),
+            date: faker.date.past().toISOString(),
             category: randomCategory,
             type: randomTransactionType,
             description: faker.lorem.sentence(),
@@ -80,4 +80,7 @@ async function dropTestDb() {
     }
 }
 
-export default seedTestDb;
+export {
+    seedTestDb,
+    generateFakeData
+};
