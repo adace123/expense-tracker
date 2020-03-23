@@ -21,8 +21,9 @@ export interface Transaction {
     _id: mongoose.Types.ObjectId,
     category: Category;
     description?: string;
-    date: Date;
+    date: string;
     type: TransactionType;
     merchant: string;
     amount: number;
+    user: mongoose.Types.ObjectId;
 }
