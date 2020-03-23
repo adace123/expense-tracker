@@ -9,17 +9,20 @@ export default gql`
     }
 
     input TransactionInput {
+        _id: ID!
         type: TransactionType!
+        date: String!
         category: Category!
         description: String
         merchant: String!
         amount: Float!
+        user: ID!
     }
 
     type Mutation {
-        createTransaction(transaction: TransactionInput!): Transaction!
-        deleteTransaction(id: ID!): Transaction!
-        updateTransaction(id: ID!, transaction: TransactionInput!): Transaction!
+        createTransaction(transaction: TransactionInput!): Transaction
+        deleteTransaction(id: ID!): Transaction
+        updateTransaction(id: ID!, transaction: TransactionInput!): Transaction
     }
     
     enum Category {
@@ -43,6 +46,7 @@ export default gql`
         description: String
         merchant: String!
         amount: Float!
+        user: ID!
     }    
 
     type User {
