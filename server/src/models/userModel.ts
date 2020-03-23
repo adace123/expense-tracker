@@ -9,7 +9,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    transactions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'transactions' }]
+    transactions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'transaction' }]
 });
 
 export default mongoose.model('user', UserSchema);
