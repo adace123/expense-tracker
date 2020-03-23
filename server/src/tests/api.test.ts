@@ -2,9 +2,9 @@ import { expect } from 'chai';
 import 'mocha';
 import * as supertest from 'supertest';
 import app from '../server';
-import seedTestDb from '../seeds';
+import { seedTestDb, generateFakeData } from '../seeds';
 import { queries, mutations } from './constants';
-import { Transaction } from '../types/transaction';
+import { Transaction, Category, TransactionType } from '../types/transaction';
 import { User } from '../types/user';
 import transactionModel from '../models/transactionModel';
 import { fail } from 'assert';
@@ -54,7 +54,6 @@ describe('GraphQL API test', () => {
                 .expect(200)
                 .end((err, { body }) => {
                     if (err) return done(err);
-    
                     expect(body.data).to.have.property('transactions');
                     expect(body).not.to.have.property('errors');
                     expect(body.data.transactions).to.be.an('array');
@@ -101,7 +100,7 @@ describe('GraphQL API test', () => {
 
         it('should return a single user', async () => {
             const user = await userModel.findOne().exec();
-            if (!user) fail('Could not find transaction');
+            if (!user) fail('Could not find user');
             
             request.post('/graphql')
                 .send({
@@ -115,6 +114,31 @@ describe('GraphQL API test', () => {
                     expect(body).not.to.have.property('errors');
                     expect(validateUser(body.data.user)).to.be.true;
                     expect(body.data.user._id).to.be.equal(user._id.toString());
+                });
+        });
+    });
+
+    describe('Test Mutations', () => {
+        it('should add a transaction to the DB', async () => {
+            const user = await userModel.findOne().exec();
+            if (!user) fail('Could not find user');
+
+            const { transactions } = generateFakeData(1, 1);
+            transactions[0].user = user._id;
+            
+            request.post('/graphql')
+                .send({
+                    query: mutations.createTransaction,
+                    variables: {
+                        transaction: transactions[0]
+                    }
+                })
+                .expect(200)
+                .end((err,  { body }) => {
+                    expect(err).to.be.null;
+                    expect(body.data).to.have.property('transaction');
+                    expect(validateTransaction(body.data.transaction)).to.be.true;
+                    expect(body.data.transaction.user).to.be.equal(user._id);
                 });
         });
     });

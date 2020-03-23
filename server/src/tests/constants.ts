@@ -51,7 +51,18 @@ const queries = {
 };
 
 const mutations = {
-
+    createTransaction: `
+        mutation createTransaction($transaction: TransactionInput!) {
+            createTransaction(transaction: $transaction) {
+                amount
+                description
+                merchant
+                date
+                category
+                user
+            }
+        }
+    `
 };
 
 export {
