@@ -32,8 +32,8 @@ export default {
         deleteTransaction(parent, { id }, context, info): Promise<mongoose.Document | null> {
             return transactionModel.findByIdAndDelete(id).exec();
         },
-        updateTransaction(parent, { id, transaction }, context, info): Promise<mongoose.Document | null> {
-            return transactionModel.findByIdAndUpdate(id, transaction, { new: true }).exec();
+        updateTransaction(parent, { transaction }, context, info): Promise<mongoose.Document | null> {
+            return transactionModel.findByIdAndUpdate(transaction._id, transaction, { new: true }).exec();
         }
     }
 }
