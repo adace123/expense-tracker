@@ -88,6 +88,13 @@ const mutations = {
                 ${userFields}
             }
         }
+    `,
+    deleteUser: `
+        mutation deleteUser($id: ID!) {
+            deleteUser(id: $id) {
+                ${userFields}
+            }
+        }
     `
 };
 
