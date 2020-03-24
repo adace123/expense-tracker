@@ -25,6 +25,7 @@ export default gql`
         updateTransaction(transaction: TransactionInput!): Transaction
         createUser(user: UserInput!): User
         updateUser(user: UserInput!): User
+        deleteUser(id: ID!): User
     }
     
     enum Category {

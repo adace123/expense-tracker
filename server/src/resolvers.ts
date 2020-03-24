@@ -40,6 +40,11 @@ export default {
         },
         updateUser(parent, { user }, context, info): Promise<mongoose.Document | null> {
             return userModel.findByIdAndUpdate(user._id, user, { new: true }).exec();
+        },
+        deleteUser(parent, { id }, context, info): Promise<mongoose.Document | null> {
+            return transactionModel.deleteMany({user: id}).then(() => {
+                return userModel.findByIdAndDelete(id).exec();
+            });
         }
     }
 }
