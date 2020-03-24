@@ -133,6 +133,7 @@ describe('GraphQL API test', () => {
                     }
                 })
                 .expect(200);
+            
             expect(body.data).to.have.property('createTransaction');
             expect(validateTransaction(body.data.createTransaction)).to.be.true;
             expect(body.data.createTransaction.user).to.be.equal(user._id.toString());
@@ -184,8 +185,28 @@ describe('GraphQL API test', () => {
                     variables: { user: users[0] }  
                 })
                 .expect(200)
+            
             expect(body.data).to.have.property('createUser');
             expect(validateUser(body.data.createUser)).to.be.true;
+        });
+
+        it('should update a user', async () => {
+            const user = await userModel.findOne().exec();
+            if (!user) fail('Could not find any users');
+            
+            const { body } = await request.post('/graphql')
+                .send({
+                    query: mutations.updateUser,
+                    variables: {
+                        user: {_id: user._id, email: 'abc123@gmail.com', password: 'secretpass1'}
+                    }
+                })
+            
+            expect(body.data).to.have.property('updateUser');
+            expect(validateUser(body.data.updateUser)).to.be.true;
+
+            expect(body.data.updateUser.email).to.be.equal('abc123@gmail.com');
+            expect(body.data.updateUser.password).to.be.equal('secretpass1');
         });
     });
     

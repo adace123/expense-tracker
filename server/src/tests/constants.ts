@@ -81,6 +81,13 @@ const mutations = {
                 ${userFields}
             }
         }
+    `,
+    updateUser: `
+        mutation updateUser($user: UserInput!) {
+            updateUser(user: $user) {
+                ${userFields}
+            }
+        }
     `
 };
 
