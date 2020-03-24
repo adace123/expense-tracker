@@ -37,6 +37,9 @@ export default {
         },
         createUser(parent, { user }, context, info): Promise<mongoose.Document> {
             return userModel.create(user);
+        },
+        updateUser(parent, { user }, context, info): Promise<mongoose.Document | null> {
+            return userModel.findByIdAndUpdate(user._id, user, { new: true }).exec();
         }
     }
 }
