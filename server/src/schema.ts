@@ -23,6 +23,7 @@ export default gql`
         createTransaction(transaction: TransactionInput!): Transaction
         deleteTransaction(id: ID!): Transaction
         updateTransaction(transaction: TransactionInput!): Transaction
+        createUser(user: UserInput!): User
     }
     
     enum Category {
@@ -48,6 +49,13 @@ export default gql`
         amount: Float!
         user: ID!
     }    
+
+    input UserInput {
+        _id: ID!
+        email: String
+        password: String
+        transactions: [TransactionInput]
+    }
 
     type User {
         _id: ID!
