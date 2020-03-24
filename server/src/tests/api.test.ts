@@ -40,7 +40,7 @@ function validateUser(user: User) {
 
     return Object.entries(userFields).every(([key, type]) => {
         return user.hasOwnProperty(key) && typeof user[key] === type;
-    })
+    }) && Array.isArray(user.transactions);
 }
     
 
@@ -173,6 +173,19 @@ describe('GraphQL API test', () => {
 
             expect(body.data).to.have.property('deleteTransaction');
             expect(validateTransaction(body.data.deleteTransaction)).to.be.true;
+        });
+
+        it('should add a user to the DB', async () => {
+            const { users } = generateFakeData(0, 1);
+
+            const { body } = await request.post('/graphql')
+                .send({
+                    query: mutations.createUser,
+                    variables: { user: users[0] }  
+                })
+                .expect(200)
+            expect(body.data).to.have.property('createUser');
+            expect(validateUser(body.data.createUser)).to.be.true;
         });
     });
     

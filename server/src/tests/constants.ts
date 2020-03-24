@@ -9,6 +9,15 @@ const transactionFields = `
     type
 `
 
+const userFields = `
+    _id
+    email
+    password
+    transactions {
+        amount
+    }
+`
+
 const queries = {
     transactions: `
         {
@@ -26,12 +35,7 @@ const queries = {
     `,
     users: `{
         users {
-            _id
-            email
-            password
-            transactions {
-                amount
-            }
+            ${userFields}
         }
     }
     `,
@@ -68,6 +72,13 @@ const mutations = {
         mutation deleteTransaction($id: ID!) {
             deleteTransaction(id: $id) {
                 ${transactionFields}
+            }
+        }
+    `,
+    createUser: `
+        mutation createUser($user: UserInput!) {
+            createUser(user: $user) {
+                ${userFields}
             }
         }
     `
