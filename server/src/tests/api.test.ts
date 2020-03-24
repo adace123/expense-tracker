@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import 'mocha';
+import * as mongoose from 'mongoose';
 import * as supertest from 'supertest';
 import app from '../server';
 import { seedTestDb, generateFakeData } from '../seeds';
@@ -20,7 +21,8 @@ function validateTransaction(transaction: Transaction) {
         category: 'string',
         description: 'string',
         merchant: 'string',
-        amount: 'number'
+        amount: 'number',
+        user: 'string'
     };
 
     return Object.entries(transactionFields).every(([key, type]) => {
@@ -83,63 +85,94 @@ describe('GraphQL API test', () => {
             const transaction = await transactionModel.findOne().exec();
             if (!transaction) fail('Could not find transaction');
             
-            request.post('/graphql')
+            const { body } = await request.post('/graphql')
                 .send({
                     query: queries.transaction,
                     variables: { transactionId: transaction._id }
                 })
-                .expect(200)
-                .end((err, { body }) => {
-                    expect(err).to.be.null;
-                    expect(body.data).to.have.property('transaction');
-                    expect(body).not.to.have.property('errors');
-                    expect(validateTransaction(body.data.transaction)).to.be.true;
-                    expect(body.data.transaction._id).to.be.equal(transaction._id.toString());
-                });
+                .expect(200);
+            
+            expect(body.data).to.have.property('transaction');
+            expect(body).not.to.have.property('errors');
+            
+            expect(validateTransaction(body.data.transaction)).to.be.true;
+            expect(body.data.transaction._id).to.be.equal(transaction._id.toString());
         });
 
         it('should return a single user', async () => {
             const user = await userModel.findOne().exec();
             if (!user) fail('Could not find user');
             
-            request.post('/graphql')
+            const { body } = await request.post('/graphql')
                 .send({
                     query: queries.user,
                     variables: { userId: user._id }
                 })
-                .expect(200)
-                .end((err, { body }) => {
-                    expect(err).to.be.null;
-                    expect(body.data).to.have.property('user');
-                    expect(body).not.to.have.property('errors');
-                    expect(validateUser(body.data.user)).to.be.true;
-                    expect(body.data.user._id).to.be.equal(user._id.toString());
-                });
+                .expect(200);
+            
+            expect(body.data).to.have.property('user');
+            expect(body).not.to.have.property('errors');
+            expect(validateUser(body.data.user)).to.be.true;
+            expect(body.data.user._id).to.be.equal(user._id.toString());
         });
     });
 
     describe('Test Mutations', () => {
         it('should add a transaction to the DB', async () => {
             const user = await userModel.findOne().exec();
-            if (!user) fail('Could not find user');
+            if (!user) fail('Could not find any users');
 
             const { transactions } = generateFakeData(1, 1);
             transactions[0].user = user._id;
             
-            request.post('/graphql')
+            const { body } = await request.post('/graphql')
                 .send({
                     query: mutations.createTransaction,
                     variables: {
                         transaction: transactions[0]
                     }
                 })
+                .expect(200);
+            expect(body.data).to.have.property('createTransaction');
+            expect(validateTransaction(body.data.createTransaction)).to.be.true;
+            expect(body.data.createTransaction.user).to.be.equal(user._id.toString());
+        });
+
+        it('should update a transaction', async () => {
+            const transaction = await transactionModel.findOne().exec();
+            if (!transaction) fail('Could not find any transactions');
+            
+            request.post('/graphql')
+                .send({
+                    query: mutations.updateTransaction,
+                    variables: {
+                        transaction: {_id: transaction._id, amount: 123.45}
+                    }
+                })
                 .expect(200)
-                .end((err,  { body }) => {
+                .end((err, { body }) => {
                     expect(err).to.be.null;
-                    expect(body.data).to.have.property('transaction');
-                    expect(validateTransaction(body.data.transaction)).to.be.true;
-                    expect(body.data.transaction.user).to.be.equal(user._id);
-                });
+                    expect(body.data).to.have.property('updateTransaction');
+                    expect(validateTransaction(body.data.updateTransaction)).to.be.true;
+                    expect(parseFloat(body.data.updateTransaction.amount)).to.equal(123.45);
+                })
+        });
+
+        it('should delete a transaction', async () => {
+            const transaction = await transactionModel.findOne().exec();
+            if (!transaction) fail('Could not find any transactions');
+
+            const { body } = await request.post('/graphql')
+                .send({
+                    query: mutations.deleteTransaction,
+                    variables: {
+                        id: transaction._id
+                    }
+                })
+                .expect(200);
+
+            expect(body.data).to.have.property('deleteTransaction');
+            expect(validateTransaction(body.data.deleteTransaction)).to.be.true;
         });
     });
     

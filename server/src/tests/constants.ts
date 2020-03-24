@@ -1,27 +1,26 @@
+const transactionFields = `
+    _id
+    amount
+    description
+    merchant
+    date
+    category
+    user
+    type
+`
+
 const queries = {
     transactions: `
         {
             transactions {
-                _id
-                amount
-                description
-                merchant
-                date
-                category
-                type
+                ${transactionFields}
             }
         }
     `,
     transaction: `
        query getTransaction($transactionId: ID!) {
             transaction(id: $transactionId) {
-                _id
-                amount
-                description
-                merchant
-                date
-                category
-                type
+                ${transactionFields}
             }
         }
     `,
@@ -54,12 +53,21 @@ const mutations = {
     createTransaction: `
         mutation createTransaction($transaction: TransactionInput!) {
             createTransaction(transaction: $transaction) {
-                amount
-                description
-                merchant
-                date
-                category
-                user
+                ${transactionFields}
+            }
+        }
+    `,
+    updateTransaction: `
+        mutation updateTransaction($transaction: TransactionInput!) {
+            updateTransaction(transaction: $transaction) {
+                ${transactionFields}
+            }
+        }
+    `,
+    deleteTransaction: `
+        mutation deleteTransaction($id: ID!) {
+            deleteTransaction(id: $id) {
+                ${transactionFields}
             }
         }
     `
