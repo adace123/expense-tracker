@@ -1,15 +1,14 @@
 import { expect } from 'chai';
 import 'mocha';
-import * as mongoose from 'mongoose';
 import * as supertest from 'supertest';
 import app from '../server';
 import { seedTestDb, generateFakeData } from '../seeds';
 import { queries, mutations } from './constants';
-import { Transaction, Category, TransactionType } from '../types/transaction';
-import { User } from '../types/user';
-import transactionModel from '../models/transactionModel';
+import { Transaction } from 'types/transaction';
+import { User } from 'types/user';
 import { fail } from 'assert';
-import userModel from '../models/userModel';
+import transactionModel from 'models/transactionModel';
+import userModel from 'models/userModel';
 
 const request = supertest(app);
 
@@ -49,7 +48,7 @@ describe('GraphQL API test', () => {
         return seedTestDb(10, 5);
     });
 
-    describe.skip('Test Queries', () => {
+    describe('Test Queries', () => {
         it('should return a list of transactions', (done) => {
             request.post('/graphql')
                 .send({ query: queries.transactions })
@@ -118,7 +117,7 @@ describe('GraphQL API test', () => {
     });
 
     describe('Test Mutations', () => {
-        it.skip('should add a transaction to the DB', async () => {
+        it('should add a transaction to the DB', async () => {
             const user = await userModel.findOne().exec();
             if (!user) fail('Could not find any users');
 
@@ -139,7 +138,7 @@ describe('GraphQL API test', () => {
             expect(body.data.createTransaction.user).to.be.equal(user._id.toString());
         });
 
-        it.skip('should update a transaction', async () => {
+        it('should update a transaction', async () => {
             const transaction = await transactionModel.findOne().exec();
             if (!transaction) fail('Could not find any transactions');
             
@@ -159,7 +158,7 @@ describe('GraphQL API test', () => {
                 })
         });
 
-        it.skip('should delete a transaction', async () => {
+        it('should delete a transaction', async () => {
             const transaction = await transactionModel.findOne().exec();
             if (!transaction) fail('Could not find any transactions');
 
@@ -176,7 +175,7 @@ describe('GraphQL API test', () => {
             expect(validateTransaction(body.data.deleteTransaction)).to.be.true;
         });
 
-        it.skip('should add a user to the DB', async () => {
+        it('should add a user to the DB', async () => {
             const { users } = generateFakeData(0, 1);
 
             const { body } = await request.post('/graphql')
@@ -190,7 +189,7 @@ describe('GraphQL API test', () => {
             expect(validateUser(body.data.createUser)).to.be.true;
         });
 
-        it.skip('should update a user', async () => {
+        it('should update a user', async () => {
             const user = await userModel.findOne().exec();
             if (!user) fail('Could not find any users');
             
