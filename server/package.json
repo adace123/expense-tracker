@@ -32,13 +32,14 @@
     "nodemon": "^2.0.2",
     "supertest": "^4.0.2",
     "ts-node": "^8.6.2",
+    "tsconfig-paths": "^3.9.0",
     "typescript": "^3.8.3",
     "uuid": "^7.0.2"
   },
   "scripts": {
     "start": "node src/dist/server.js",
-    "dev": "NODE_ENV=DEV nodemon src/server.ts",
-    "test": "NODE_ENV=DEV mocha --timeout 10000 --exit -r ts-node/register src/tests/*.test.ts",
+    "dev": "NODE_ENV=DEV nodemon -r tsconfig-paths/register src/server.ts",
+    "test": "NODE_ENV=DEV mocha --timeout 10000 --exit -r ts-node/register -r tsconfig-paths/register src/tests/*.test.ts",
     "build": "tsc -p src/"
   }
 }
