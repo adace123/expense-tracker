@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+import { User } from 'types/user';
 
 const UserSchema = new mongoose.Schema({
     email: {
@@ -12,4 +13,4 @@ const UserSchema = new mongoose.Schema({
     transactions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'transaction' }]
 });
 
-export default mongoose.model('user', UserSchema);
+export default mongoose.model<User & mongoose.Document>('user', UserSchema);

@@ -1,5 +1,5 @@
 import * as mongoose from 'mongoose';
-import { Category, TransactionType } from '../types/transaction';
+import { Category, TransactionType, Transaction } from 'types/transaction';
 
 const TransactionSchema = new mongoose.Schema({
     category: {
@@ -31,4 +31,4 @@ const TransactionSchema = new mongoose.Schema({
     }
 });
 
-export default mongoose.model('transaction', TransactionSchema);
+export default mongoose.model<Transaction & mongoose.Document>('transaction', TransactionSchema);

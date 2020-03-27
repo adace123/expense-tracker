@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
-import transactionModel from './models/transactionModel';
-import userModel from './models/userModel';
+import transactionModel from 'models/transactionModel';
+import userModel from 'models/userModel';
 
 export default {
     Query: {

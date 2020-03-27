@@ -2,10 +2,10 @@ import * as faker from 'faker';
 import * as _ from 'lodash';
 import * as mongoose from 'mongoose';
 
-import { User } from './types/user';
-import { Transaction, Category, TransactionType } from './types/transaction';
-import transactionModel from './models/transactionModel';
-import userModel from './models/userModel';
+import { User } from 'types/user';
+import { Transaction, Category, TransactionType } from 'types/transaction';
+import transactionModel from 'models/transactionModel';
+import userModel from 'models/userModel';
 
 interface FakeData {
     users: Array<User>;
