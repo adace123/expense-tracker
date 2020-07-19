@@ -27,7 +27,7 @@
     "chai": "^4.2.0",
     "commander": "^4.1.1",
     "faker": "^4.1.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "mocha": "^7.1.0",
     "nodemon": "^2.0.2",
     "supertest": "^4.0.2",
